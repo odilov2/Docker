@@ -1,12 +1,40 @@
+#
+#services:
+#  db:
+#    image: postgres:15
+#    restart: always
+#    environment:
+#      POSTGRES_DB: flask2
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: 7983
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#
+#  web:
+#    build: .
+#    command: python manage.py runserver 0.0.0.0:8000
+#    volumes:
+#      - .:/webapp
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
+#    environment:
+#      - DB_NAME=flask2
+#      - DB_USER=postgres
+#      - DB_PASSWORD=7983
+#      - DB_HOST=db
+#volumes:
+#  postgres_data:
 
 services:
   db:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_DB: flask2
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 7983
+      POSTGRES_DB: "flask2"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "7983"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -14,15 +42,17 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/webapp
+      - .:/app
     ports:
       - "8000:8000"
     depends_on:
       - db
     environment:
-      - DB_NAME=flask2
-      - DB_USER=postgres
-      - DB_PASSWORD=7983
-      - DB_HOST=db
+      DB_NAME: "flask2"
+      DB_USER: "postgres"
+      DB_PASSWORD: "7983"
+      DB_HOST: db
+      DB_PORT: 5432
+
 volumes:
   postgres_data:
